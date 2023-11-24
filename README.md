@@ -1,19 +1,46 @@
-## Description
+## Description【描述】
 This project was carried out for messaging purposes using the mqtt protocol.
 
-## Sample
-![app11](https://user-images.githubusercontent.com/48598966/138068101-d02b43d3-9098-4bc3-852e-2c749584d34e.png)
-You can connect to the broker with user and password authentication or anonymously. The image shows an example of connection with user and password authentication. Mosquitto broker is currently not working. If you use the mosquitto switch, you will not be able to connect. If you want, you can fix the code and add your own broker here.
+该项目是使用 mqtt 协议进行消息传递的。
 
-![example](https://user-images.githubusercontent.com/48598966/138402340-f5c1effa-a56e-42df-aa68-7cef62cb9535.PNG)
+
+
+
+
+## Sample【示例】
+
+![login](http://pic.song0123.com/img/login.png)
+You can connect to the broker with user and password authentication or anonymously. The image shows an example of connection with user and password authentication.
+
+您可以通过用户和密码身份验证或匿名方式连接到代理。 该图显示了使用用户和密码身份验证的连接示例。
+
+![publish](http://pic.song0123.com/img/publish.png)
 
 Firebase anonymous authentication takes place when you successfully connect to your broker. Your unique authentication id and other information is saved in the Firestore database. If you do not log out, your information will be remembered. If you log out, your anonymous identity and connection information will be deleted.
 
-![app55](https://user-images.githubusercontent.com/48598966/138079766-86108307-51e4-45b0-b74d-c3fc9b3c3f18.png)
+当您成功连接到代理时，Firebase 会进行匿名身份验证。 您的唯一身份验证 ID 和其他信息保存在 Firestore 数据库中。 如果您不退出，您的信息将被记住。 如果您退出，您的匿名身份和连接信息将被删除。
+
+
+
 Publish and subscribe example can be seen in the pictures. You can choose qos(Quality of Service) when publishing and subscribing. You can publish the message as retain (Remember, each topic can only have one retained message). 
 
+发布和订阅示例可以在图片中看到。 发布和订阅时可以选择qos（服务质量）。 您可以将消息发布为保留（请记住，每个主题只能有一条保留消息）。
+
+ ![image-20231124182048230](http://pic.song0123.com/img/image-20231124182048230.png)
+
+
+
+
+
 If you want to delete your information and session, you can exit from the menu at the top or use the back button of your device.
-## Sources
+
+如果您想删除您的信息和会话，您可以从顶部菜单退出或使用设备的后退按钮。
+
+ ![logout](http://pic.song0123.com/img/logout.png)
+
+
+
+## Sources【源码】
 
 Eclipse Paho Android Service
 
@@ -25,7 +52,15 @@ Firabase Firestore https://firebase.google.com/docs/firestore
 
 Icon made by Freepik from www.flaticon.com
 
-## Contact
-Mehmet Emre Kobak
+Reference projects: https://github.com/emrekobak/Android-MQTT-Client
 
-Mail: kobakmehmetemre@gmail.com
+
+
+
+
+## Contact【联系】
+
+Andysung
+
+Mail: hiandysong@gmail.com
+
