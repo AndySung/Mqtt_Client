@@ -35,6 +35,9 @@ public class ConsoleActivity extends AppCompatActivity {
     LinearLayout btnPub;
     FirebaseFirestore fireDB = FirebaseFirestore.getInstance();
 //    ProgressBar progressBar;
+    DashboardFragment myDashboardFragment;
+    PublishFragment myPublishFragment;
+    SubscribeFragment mySubscribeFragment;
 
     @SuppressLint("NewApi")
     @Override
@@ -51,7 +54,7 @@ public class ConsoleActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     fragmentClass.ChangeFragment(new DashboardFragment());
-                    LayoutName();
+//                    LayoutName();
 //                    progressBar=findViewById(R.id.progressInfo);
 //                    progressBar.setVisibility(View.INVISIBLE);
                 }
@@ -66,12 +69,16 @@ public class ConsoleActivity extends AppCompatActivity {
         dashboard_text = findViewById(R.id.dashboard_text);
         subscribe_text = findViewById(R.id.subscribe_text);
         publish_text = findViewById(R.id.publish_text);
+        myDashboardFragment = new DashboardFragment();
+        myPublishFragment =   new PublishFragment();
+        mySubscribeFragment =   new SubscribeFragment();
+
         switchButton(true,false,false);
         btnPub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switchButton(false,false,true);
-                fragmentClass.ChangeFragment(new PublishFragment());
+                fragmentClass.ChangeFragment(myPublishFragment);
                 setTitle("Publish");
             }
         });
@@ -79,7 +86,7 @@ public class ConsoleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 switchButton(false,true,false);
-                fragmentClass.ChangeFragment(new SubscribeFragment());
+                fragmentClass.ChangeFragment(mySubscribeFragment);
                 setTitle("Subscribe");
             }
         });
@@ -88,8 +95,8 @@ public class ConsoleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     switchButton(true,false,false);
-                    fragmentClass.ChangeFragment(new DashboardFragment());
-                    LayoutName();
+                    fragmentClass.ChangeFragment(myDashboardFragment);
+                  //  LayoutName();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -97,30 +104,30 @@ public class ConsoleActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.cont_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {//menu
-        if (item.getItemId() == R.id.log_out) {
-            try {
-                mAuth = FirebaseAuth.getInstance();
-                FirebaseUser currentUser = mAuth.getCurrentUser();
-                mqttClass.ManageUsers();
-                currentUser.delete();
-                mAuth.signOut();
-                finish();
-                mqttClass.Disconnect(getApplicationContext());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.cont_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {//menu
+//        if (item.getItemId() == R.id.log_out) {
+//            try {
+//                mAuth = FirebaseAuth.getInstance();
+//                FirebaseUser currentUser = mAuth.getCurrentUser();
+//                mqttClass.ManageUsers();
+//                currentUser.delete();
+//                mAuth.signOut();
+//                finish();
+//                mqttClass.Disconnect(getApplicationContext());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -135,7 +142,7 @@ public class ConsoleActivity extends AppCompatActivity {
 
     }
 
-    void LayoutName() {
+   /* void LayoutName() {
         fireDB.collection("Users")
                 .whereEqualTo("UserID", mAuth.getUid())
                 .get()
@@ -151,7 +158,7 @@ public class ConsoleActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
+    }*/
 
     @SuppressLint("NewApi")
     public void switchButton(boolean dashboardChecked, boolean subscribeChecked, boolean publishChecked) {
