@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/black"
+            android:text="MQTT Broker" android:textSize="24sp" android:padding="10dp" android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/LoginTextInputLayoutStyle"
+                android:theme="@style/LoginTextInputLayoutStyle"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="15dp"
+                    android:hint="Name"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/LoginTextInputLayoutStyle"
+                android:theme="@style/LoginTextInputLayoutStyle"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="15dp"
+                    android:hint="Host"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/LoginTextInputLayoutStyle"
+                android:theme="@style/LoginTextInputLayoutStyle"
+                android:background="@null"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtPort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="15dp"
+                    android:hint="Port"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:text="Authorization"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp" />
+                <CheckBox android:id="@+id/userSw" android:layout_height="wrap_content" android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true" android:theme="@style/MyCheckBox" android:checked="false"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/layout_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:theme="@style/LoginTextInputLayoutStyle"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="15dp"
+                        android:hint="username"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:theme="@style/LoginTextInputLayoutStyle"
+                    android:background="@null"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtPasswd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="15dp"
+                        android:hint="password"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="20dp">
+            <Button android:layout_width="wrap_content" android:layout_height="40dp" android:text="Connect"
+                android:textColor="@color/white"  android:background="@drawable/button_bg" android:layout_alignParentRight="true"
+                android:textAllCaps="false" android:id="@+id/btnConnect" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
