@@ -63,6 +63,14 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if ( MessageListInfo.getAdapter() == null) {
+            notifyDataSetChanged();
+        }
+    }
+
     private void initView() {
         connect_btn = view.findViewById(R.id.connect_btn);
         more_btn = view.findViewById(R.id.more_btn);
@@ -72,6 +80,7 @@ public class DashboardFragment extends Fragment {
         host_layout = view.findViewById(R.id.host_layout);
         arrayList = new ArrayList<>();
         getInfo(getContext());
+        notifyDataSetChanged();
     }
 
     private void initData() {
@@ -185,6 +194,13 @@ public class DashboardFragment extends Fragment {
             public void deliveryComplete(IMqttDeliveryToken token) {
             }
         });
+    }
+
+    private void notifyDataSetChanged() {//
+        if (adapter == null) {
+            adapter = new MessageListViewAdapter(getContext(), arrayList);
+        }
+        MessageListInfo.setAdapter(adapter);
     }
 
     private void showPopupMenu(View view) {

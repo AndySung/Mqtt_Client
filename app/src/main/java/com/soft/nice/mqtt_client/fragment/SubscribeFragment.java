@@ -7,23 +7,33 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.soft.nice.mqtt_client.MqttClass;
 import com.soft.nice.mqtt_client.R;
 import com.soft.nice.mqtt_client.utils.Utils;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
+
+import java.util.ArrayList;
 
 public class SubscribeFragment extends Fragment {
     View view;
     private TextInputEditText editText_client_topic;
     private RadioButton qos_0, qos_1, qos_2;
     private Button subscribe_btn;
+    private ListView listSubscribe;
+    private ArrayAdapter<String> SubscribeAdapter;
+    private ArrayList<String> arrayList;
     private int qos_type;
     @Nullable
     @Override
@@ -35,13 +45,24 @@ public class SubscribeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if ( listSubscribe.getAdapter() == null) {
+            notifyDataSetChanged();
+        }
+    }
+
     private void initView() {
         editText_client_topic = view.findViewById(R.id.editText_client_topic);
         qos_0 = view.findViewById(R.id.qos_0);
         qos_1 = view.findViewById(R.id.qos_1);
         qos_2 = view.findViewById(R.id.qos_2);
         subscribe_btn = view.findViewById(R.id.subscribe_btn);
+        listSubscribe = view.findViewById(R.id.subscribe_list);
+        arrayList = new ArrayList<>();
         isEmptyEditText();
+        notifyDataSetChanged();
     }
 
     private void initData() {
@@ -65,6 +86,9 @@ public class SubscribeFragment extends Fragment {
             public void onClick(View v) {
                 if(MqttClass.client.isConnected()) {
                     Sub(getContext());
+                    arrayList.add(0, "Topic: " + editText_client_topic.getText().toString() + "\n" + "Enabled");
+                    SubscribeAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);   //////qos eklenecek. mesaj sırası tamam.
+                    listSubscribe.setAdapter(SubscribeAdapter);
                 }else{
                     Utils.showToast(getContext(), "The connection has been disconnected, please reconnect");
                 }
@@ -113,5 +137,12 @@ public class SubscribeFragment extends Fragment {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+    }
+
+    private void notifyDataSetChanged() {//
+        if (SubscribeAdapter == null) {
+            SubscribeAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);   //////qos eklenecek. mesaj sırası tamam.
+        }
+        listSubscribe.setAdapter(SubscribeAdapter);
     }
 }
