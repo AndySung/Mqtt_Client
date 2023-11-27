@@ -5,51 +5,7 @@
     android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
-    <RelativeLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:background="@color/bg_color">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
-            android:padding="10dp" android:id="@+id/subscribe_layout">
-            <TextView android:id="@+id/host_text" android:layout_height="wrap_content" android:layout_width="wrap_content"
-                android:text="Subscribe" android:textSize="24sp" android:textColor="@color/black" android:layout_marginBottom="10dp"/>
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/LoginTextInputLayoutStyle"
-                android:theme="@style/LoginTextInputLayoutStyle"
-                android:background="@null"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editText_client_topic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:padding="15dp"
-                    android:hint="Topic"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <RadioGroup android:id="@+id/send_type_group" android:layout_below="@+id/subscribe_layout"
-            android:gravity="center" android:orientation="horizontal" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:padding="15dp">
-            <RadioButton android:id="@+id/qos_0" android:layout_height="wrap_content" android:layout_width="match_parent"
-                android:text="QoS 0" android:textSize="18sp" android:textColor="@color/black" android:gravity="center"
-                android:layout_weight="1" android:checked="false" android:button="@null" android:padding="7dp"
-                android:background="@drawable/radio_btn"/>
-            <RadioButton android:id="@+id/qos_1" android:layout_height="wrap_content" android:layout_width="match_parent"
-                android:text="QoS 1" android:textSize="18sp" android:textColor="@color/black" android:gravity="center"
-                android:layout_weight="1" android:checked="false" android:button="@null" android:padding="7dp"
-                android:background="@drawable/radio_btn" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
-            <RadioButton android:id="@+id/qos_2" android:layout_height="wrap_content" android:layout_width="match_parent"
-                android:text="QoS 2" android:textSize="18sp" android:textColor="@color/black" android:gravity="center"
-                android:layout_weight="1" android:checked="true" android:button="@null" android:padding="7dp"
-                android:background="@drawable/radio_btn"/>
-        </RadioGroup>
-        <Button android:layout_width="wrap_content" android:layout_height="40dp" android:text="Subscribe"
-            android:textColor="@color/white"  android:background="@drawable/button_bg" android:layout_alignParentRight="true"
-            android:textAllCaps="false" android:id="@+id/subscribe_btn" android:layout_below="@+id/send_type_group"
-            android:layout_marginRight="15dp" android:layout_marginTop="20dp" android:layout_marginBottom="20dp"
-            android:paddingLeft="15dp" android:paddingRight="15dp"/>
-    </RelativeLayout>
+    <include layout="@layout/layout_subscribe_top_view"/>
 
     <ListView android:id="@+id/subscribe_list" android:layout_height="match_parent" android:layout_width="match_parent"/>
 </LinearLayout>

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.soft.nice.mqtt_client.MqttClass;
 import com.soft.nice.mqtt_client.R;
+import com.soft.nice.mqtt_client.utils.MyListView;
 import com.soft.nice.mqtt_client.utils.Utils;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -29,7 +30,7 @@ public class PublishFragment extends Fragment {
     private CheckBox retain_check;
     private RadioButton qos_0, qos_1, qos_2;
     private Button publish_btn;
-    private ListView listPublish;
+    private MyListView listPublish;
     private ArrayAdapter<String> PublishAdapter;
     private ArrayList<String> arrayList;
     private int qos_type;

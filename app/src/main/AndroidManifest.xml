@@ -16,15 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mqtt_Client">
         <activity android:name="com.soft.nice.mqtt_client.MainActivity"
-            android:exported="true">
+            android:exported="true" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.soft.nice.mqtt_client.ConsoleActivity"/>
+        <activity android:name="com.soft.nice.mqtt_client.ConsoleActivity" android:exported="true" android:screenOrientation="portrait"/>
 
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service android:name="org.eclipse.paho.android.service.MqttService" android:exported="true" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
