@@ -26,6 +26,8 @@ import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SubscribeFragment extends Fragment {
     View view;
@@ -40,18 +42,24 @@ public class SubscribeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater,container,savedInstanceState);
-        view = inflater.inflate(R.layout.fragment_subscribe,container,false);
-        initView();
-        initData();
+        if(view == null) {
+            view = inflater.inflate(R.layout.fragment_subscribe,container,false);
+            initView();
+            initData();
+        }else {
+            //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if(parent != null) {
+                parent.removeView(view);
+            }
+        }
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if ( listSubscribe.getAdapter() == null) {
-            notifyDataSetChanged();
-        }
+        notifyDataSetChanged();
     }
 
     private void initView() {
@@ -87,7 +95,11 @@ public class SubscribeFragment extends Fragment {
             public void onClick(View v) {
                 if(MqttClass.client.isConnected()) {
                     Sub(getContext());
-                    arrayList.add(0, "Topic: " + editText_client_topic.getText().toString() + "\n" + "Enabled");
+                    if(arrayList.size() == 0 || !arrayList.contains("Topic: " + editText_client_topic.getText().toString() + "\n" + "Enabled")) {
+                        arrayList.add(0, "Topic: " + editText_client_topic.getText().toString() + "\n" + "Enabled");
+                    }else{
+                        Utils.showToast(getContext(), "This topic has been subscribed");
+                    }
                     SubscribeAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);   //////qos eklenecek. mesaj sırası tamam.
                     listSubscribe.setAdapter(SubscribeAdapter);
                 }else{
