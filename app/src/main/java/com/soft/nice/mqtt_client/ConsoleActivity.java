@@ -139,7 +139,7 @@ public class ConsoleActivity extends AppCompatActivity {
         currentUser.delete();
         mAuth.signOut();
         finish();
-
+        mySubscribeFragment.UnRegisterBroadCast();
     }
 
    /* void LayoutName() {

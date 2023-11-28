@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
@@ -84,7 +85,7 @@ public class MqttClass {
     }
 
 
-    public void ConUser(final Context context, final String server, final String user, final String passwd, final String serverName,final boolean mosqSw,final boolean userSw) {
+    public void ConUser(final Context context, final String server, final String user, final String passwd, final String serverName,final boolean mosqSw,final boolean userSw, final boolean whetherJump) {
         MqttConnectOptions opt = new MqttConnectOptions();
         opt.setCleanSession(true);
         opt.setAutomaticReconnect(true);
@@ -99,10 +100,15 @@ public class MqttClass {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     AuthAnonymous(serverName,server,user,passwd,mosqSw,userSw);
-                    Intent intent = new Intent(context, ConsoleActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    if(whetherJump){
+                        Intent intent = new Intent(context, ConsoleActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
                     Utils.showToast(context, "Connected");
+                    Intent intent = new Intent("subscribe_receive_data");    //重新连接后需要重新订阅才能收到消息
+                    intent.putExtra("subscribe_reconnected", "reconnected");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
@@ -178,7 +184,7 @@ public class MqttClass {
             }
         }
     }
-    public void ConNotUser(final Context context, final String server, final String serverName,final boolean mosqSw,final boolean userSw) {
+    public void ConNotUser(final Context context, final String server, final String serverName,final boolean mosqSw,final boolean userSw, final boolean whetherJump) {
 
         String clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(context, server,
@@ -189,10 +195,15 @@ public class MqttClass {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     AuthAnonymous(serverName,server,null,null,mosqSw,userSw);
-                    Intent intent = new Intent(context, ConsoleActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    if(whetherJump){
+                        Intent intent = new Intent(context, ConsoleActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
                     Utils.showToast(context, "Connected");
+                    Intent intent = new Intent("subscribe_receive_data");    //重新连接后需要重新订阅才能收到消息
+                    intent.putExtra("subscribe_reconnected", "reconnected");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     // Connected
                     // AuthAnonymous();
                 }

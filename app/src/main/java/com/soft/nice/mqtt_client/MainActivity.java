@@ -143,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
     void IsEnableUserConnect(boolean isUserLogin) {
         serverAdr = "tcp://" + txtAddress.getText().toString() + ":" + txtPort.getText().toString();
         if(isUserLogin) {
-            mqttClass.ConUser(getApplicationContext(), serverAdr, txtUser.getText().toString(), txtPasswd.getText().toString(), txtName.getText().toString(), false, userSw.isChecked());
+            mqttClass.ConUser(getApplicationContext(), serverAdr, txtUser.getText().toString(), txtPasswd.getText().toString(), txtName.getText().toString(), false, userSw.isChecked(), true);
         }else {
-            mqttClass.ConNotUser(getApplicationContext(), serverAdr, txtName.getText().toString(), false, userSw.isChecked());
+            mqttClass.ConNotUser(getApplicationContext(), serverAdr, txtName.getText().toString(), false, userSw.isChecked(),true);
         }
     }
 

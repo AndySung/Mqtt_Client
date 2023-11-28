@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Utils {
     public static Toast toast;
     /**
@@ -45,5 +48,19 @@ public class Utils {
         String[] temp;
         temp = str.split(delimeter); // 分割字符串
         return temp[whichPart];
+    }
+
+    public static String splitBetweenData(String str, String strStart, String strEnd) {
+        String tempStr;
+        tempStr = str.substring(str.indexOf(strStart) + 1, str.lastIndexOf(strEnd));
+        return tempStr;
+    }
+
+    public static ArrayList<String> removeItem(ArrayList<String> ls,String str) {
+        Iterator<String> iterator =ls.iterator();// 获得ArrayList对象的迭代器
+        while(iterator.hasNext())
+            if(iterator.next().contains(str))
+                iterator.remove();
+        return ls;
     }
 }

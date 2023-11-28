@@ -3,7 +3,6 @@ package com.soft.nice.mqtt_client.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.widget.ListView;
 
 /***
@@ -34,7 +33,7 @@ public class MyListView extends ListView {
         super.onMeasure(widthMeasureSpec,heightMeasureSpec);//重新测量高度
     }
 
-    float preY = 0;
+    /*float preY = 0;
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -54,23 +53,23 @@ public class MyListView extends ListView {
                 break;
         }
         return super.dispatchTouchEvent(ev);
-    }
+    }*/
 
     /**
      * 当第一个可见item为0且手势为向下滑动且全部露出
      * @param ev
      * @return
      */
-    private boolean slideToTheTop(MotionEvent ev) {
+    /*private boolean slideToTheTop(MotionEvent ev) {
         return getFirstVisiblePosition() == 0 && getChildAt(0).getTop() == 0 && ev.getY() - preY > 0;
-    }
+    }*/
 
     /**
      * 最后一个可见item为全部item最后一个且手势向上滑动且全部露出
      * @param ev
      * @return
      */
-    private boolean slideToTheBottom(MotionEvent ev) {
+    /*private boolean slideToTheBottom(MotionEvent ev) {
         return getLastVisiblePosition() == getCount() - 1 && getChildAt(getChildCount() - 1).getBottom() == getHeight() && ev.getY() - preY < 0;
-    }
+    }*/
 }

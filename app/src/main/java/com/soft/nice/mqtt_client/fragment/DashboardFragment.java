@@ -2,7 +2,6 @@ package com.soft.nice.mqtt_client.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,7 +51,6 @@ public class DashboardFragment extends Fragment {
     RelativeLayout host_layout;
     MqttClass mqttClass = new MqttClass(getContext());
     Boolean isConnected = true;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,9 +72,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        if ( MessageListInfo.getAdapter() == null) {
-            notifyDataSetChanged();
-//        }
+        notifyDataSetChanged();
     }
 
     private void initView() {
@@ -89,10 +85,10 @@ public class DashboardFragment extends Fragment {
         arrayList = new ArrayList<>();
         getInfo(getContext());
         notifyDataSetChanged();
+        getMessage(getContext());
     }
 
     private void initData() {
-        getMessage(getContext());
         more_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,13 +102,14 @@ public class DashboardFragment extends Fragment {
                 if(!isConnected) {
                     //重新连接
                     if(userName == null) {  //没有用户认证
-                        mqttClass.ConNotUser(getContext(), serverHost, serverName, false, false);
+                        mqttClass.ConNotUser(getContext(), serverHost, serverName, false, false,false);
                     }else { //有用户认证
-                        mqttClass.ConUser(getContext(), serverHost, userName, userPassword, serverName, false, true);
+                        mqttClass.ConUser(getContext(), serverHost, userName, userPassword, serverName, false, true,false);
                     }
                     connect_btn.setImageResource(R.mipmap.stop_connect_icon);
                     connect_state.setText("Connected");
                     isConnected = true;
+                    getMessage(getContext());
                 }else {
                     //断开连接
                     try {
@@ -148,8 +145,6 @@ public class DashboardFragment extends Fragment {
                                 userName = (String) document.get("ServerUser");
                                 userPassword = (String) document.get("UserPassword");
                             }
-                            Log.i("andysong----document:", "userID:"+userID+"\n" + "serverName:"+serverName+"\n" + "serverHost:" + serverHost+"\n"+"userName:"+userName+"\n"+"userPassword:"+userPassword);
-                            Log.i("andysong----host:", "SER:"+serverHost+":" );
                             if(!serverHost.equals("")) {
                                 host_text.setText(Utils.SplitTwoPartString(serverHost, "tcp://", 1));
                             }
@@ -221,7 +216,6 @@ public class DashboardFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Log.i("andysong--getItemId:", item.getItemId()+"");
                 if(item.getItemId() == R.id.clear_msg){
                     arrayList.clear();
                     adapter.notifyDataSetChanged();
