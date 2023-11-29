@@ -55,15 +55,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void CheckInternet(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            if (user != null) {
-                ControlAct();
-            }
-        } else {
-            Toast.makeText(MainActivity.this, "Please check internet connection.", Toast.LENGTH_SHORT).show();
+        if (user != null) {
+            ControlAct();
         }
+//        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+//                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+//            if (user != null) {
+//                ControlAct();
+//            }
+//        } else {
+//            Toast.makeText(MainActivity.this, "Please check internet connection.", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void initView() {

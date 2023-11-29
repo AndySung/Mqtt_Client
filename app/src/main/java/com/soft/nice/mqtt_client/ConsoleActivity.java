@@ -38,6 +38,7 @@ public class ConsoleActivity extends AppCompatActivity {
     DashboardFragment myDashboardFragment;
     PublishFragment myPublishFragment;
     SubscribeFragment mySubscribeFragment;
+    boolean broadcastExist = false;
 
     @SuppressLint("NewApi")
     @Override
@@ -87,6 +88,7 @@ public class ConsoleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switchButton(false,true,false);
                 fragmentClass.ChangeFragment(mySubscribeFragment);
+                broadcastExist = true;
                 setTitle("Subscribe");
             }
         });
@@ -133,13 +135,16 @@ public class ConsoleActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         mqttClass.Disconnect(getApplicationContext());
-//        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         mqttClass.ManageUsers();
         currentUser.delete();
         mAuth.signOut();
         finish();
-        mySubscribeFragment.UnRegisterBroadCast();
+        if(broadcastExist) {
+            mySubscribeFragment.UnRegisterBroadCast();
+        }
+        broadcastExist = false;
     }
 
    /* void LayoutName() {
