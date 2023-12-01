@@ -166,6 +166,7 @@ public class DashboardFragment extends Fragment {
         MqttClass.client.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
+
             }
 
             @Override

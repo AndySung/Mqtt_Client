@@ -25,6 +25,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.google.android.material.textfield.TextInputEditText;
 import com.soft.nice.mqtt_client.MqttClass;
 import com.soft.nice.mqtt_client.R;
+import com.soft.nice.mqtt_client.utils.MyListView;
 import com.soft.nice.mqtt_client.utils.Utils;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -36,7 +37,7 @@ public class SubscribeFragment extends Fragment {
     private RadioGroup subscribe_type_group;
     private RadioButton qos_0, qos_1, qos_2;
     private Button subscribe_btn;
-    private ListView listSubscribe;
+    private MyListView listSubscribe;
     private ArrayAdapter<String> SubscribeAdapter;
     private ArrayList<String> arrayList;
     private int qos_type;
